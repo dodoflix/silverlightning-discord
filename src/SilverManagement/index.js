@@ -1,9 +1,19 @@
 const fs = require('fs');
 const {Client, Collection, Intents} = require('discord.js');
-const token = process.env.TOKEN;
+const {token} = require('./config.json');
 
 const client = new Client({intents: [Intents.FLAGS.GUILDS]});
 
+// Register Commands
+client.commands = new Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.data.name, command);
+}
+
+// Register Events
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
@@ -15,14 +25,7 @@ for (const file of eventFiles) {
     }
 }
 
-client.commmands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
-    client.commmands.set(command.data.name, command);
-}
-
+// Slash command manager
 client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return;
 
@@ -34,7 +37,7 @@ client.on('interactionCreate', async interaction => {
         await command.execute(interaction);
     } catch (error) {
         console.error(error);
-        await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+        return interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});
     }
 });
 

@@ -1,7 +1,9 @@
+const DLogger = require('../../Modules/DLogger/index.js');
+
 module.exports = {
     name: 'ready',
     once: true,
     execute(client) {
-        console.log(`Ready! Logged in as ${client.user.tag}`);
+        DLogger.log.info(`Ready! Logged in as ${DLogger.format.bright}${client.user.tag}${DLogger.format.reset}`);
     },
 };
