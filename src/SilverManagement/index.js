@@ -51,4 +51,7 @@ client.on('interactionCreate', async interaction => {
     }
 });
 
+// TODO Bot Configuration and Utility
+/*client.user.setPresence();*/
+
 client.login(token);
