@@ -2,13 +2,13 @@ const {SlashCommandBuilder} = require('@discordjs/builders');
 const {Permissions} = require("discord.js");
 
 module.exports = {
-    name: "BulkGiveRole",
+    name: "BulkTakeRole",
     category: "Role Management",
-    description: "Gives all users a specific role..",
+    description: "Takes from all users a specific role..",
     permission: Permissions.FLAGS.MANAGE_ROLES,
     data: new SlashCommandBuilder()
-        .setName('bulkgiverole')
-        .setDescription('Gives all users a specific role.')
+        .setName('bulktakerole')
+        .setDescription('Takes all users a specific role.')
         .addRoleOption(option => option.setName('role').setDescription('The role to be assigned.').setRequired(true)),
     async execute(interaction) {
         const role = interaction.options.getRole('role');
@@ -18,10 +18,10 @@ module.exports = {
             });
         }
         interaction.guild.members.cache.each(member => {
-            member.roles.add(role);
+            member.roles.remove(role);
         });
         return interaction.reply({
-            content: `<@&${role.id}> role gived to all users.`
+            content: `<@&${role.id}> role taken from all users.`
         });
     }
 }
