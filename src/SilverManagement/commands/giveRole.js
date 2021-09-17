@@ -1,11 +1,9 @@
 const {SlashCommandBuilder} = require('@discordjs/builders');
 const {Permissions} = require("discord.js");
 
-// TODO GIVEROLE COMMAND
-
 module.exports = {
-    name: "ClearChat",
-    category: "Chat Management",
+    name: "GiveRole",
+    category: "Role Management",
     description: "Delete a certain number of messages from one user or all users on this channel.",
     permission: Permissions.FLAGS.MANAGE_MESSAGES,
     data: new SlashCommandBuilder()
@@ -16,13 +14,11 @@ module.exports = {
     async execute(interaction) {
         const member = interaction.options.getMember('user');
         const role = interaction.options.getRole('role');
-        if (interaction.guild.members.cache.fetch.has(member)) {
-            await member.roles.add(role).then(() => {
-                return interaction.reply({
-                    content: `<@${member.id}> has been given the role of <@&${role.id}>.`,
-                    ephemeral: true
-                });
+        await member.roles.add(role).then(() => {
+            return interaction.reply({
+                content: `<@${member.id}> has been given the role of <@&${role.id}>.`,
+                ephemeral: true
             });
-        }
+        });
     }
 }
