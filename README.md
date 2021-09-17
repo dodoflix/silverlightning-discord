@@ -1,3 +1,5 @@
+#SilverLightning Discord
+SilverLightning Discord is fully open source discord bot for community management. 
 #TODO
 ## Silver Management
 - [x] Base structure
@@ -16,3 +18,5 @@
 - [ ] Base structure
 ## Silver Fun
 - [ ] Base structure
+# LICENSE
+This project under MIT license.
