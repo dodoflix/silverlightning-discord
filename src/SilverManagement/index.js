@@ -2,6 +2,8 @@ const fs = require('fs');
 const {Client, Collection, Intents} = require('discord.js');
 const {token} = require('./config.json');
 
+const {MessageActionRow, MessageButton} = require('discord.js')
+
 const client = new Client({intents: [Intents.FLAGS.GUILDS]});
 
 // Register Commands
@@ -37,7 +39,15 @@ client.on('interactionCreate', async interaction => {
         await command.execute(interaction);
     } catch (error) {
         console.error(error);
-        return interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});
+        // TODO HELP BUTTON
+        const help = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                    .setCustomId('clearchat')
+                    .setLabel('Help')
+                    .setStyle('PRIMARY'),
+            );
+        return interaction.reply({content: 'There was an error while executing this command!', ephemeral: true, components: [help]});
     }
 });
 
