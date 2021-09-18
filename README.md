@@ -1,6 +1,6 @@
-#SilverLightning Discord
+# SilverLightning Discord
 SilverLightning Discord is fully open source discord bot for community management. 
-#TODO
+# TODO
 ## Silver Management
 - [x] Base structure
 - [ ] Role Management
