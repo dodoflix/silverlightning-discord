@@ -15,7 +15,6 @@ module.exports = {
         const count = interaction.options.getInteger('count') ?? 10;
         const user = interaction.options.getUser('user');
         const channels = (await interaction.guild.channels.fetch()).filter(channel => channel.type === 'GUILD_TEXT');
-        let deletedMessageCount = 0;
         channels.forEach(channel => {
             channel.messages.fetch({limit: count}).then(messages => {
                 switch (user !== null) {
