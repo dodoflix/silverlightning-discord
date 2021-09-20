@@ -1,5 +1,12 @@
 {
   "clientId": "",
   "guildId": "",
-  "token": ""
+  "token": "",
+  "database": "SilverManagement",
+  "user": "",
+  "password": "",
+  "host": "localhost",
+  "dialect": "sqlite",
+  "logging": false,
+  "storage": "source/database.sqlite"
 }
